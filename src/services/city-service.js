@@ -1,3 +1,4 @@
+const { CityController } = require("../controllers");
 const { CityRepository } = require("../repository/index");
 
 class CityService {
@@ -5,10 +6,20 @@ class CityService {
     this.cityRepository = new CityRepository();
   }
 
-  async createCity(data) {
+  async createCity({ name }) {
     try {
-      const city = await this.cityRepository.createCity(data);
+      const city = await this.cityRepository.createCity(name);
       return city;
+    } catch (error) {
+      console.log("Something went wrong in service layer");
+      throw { error };
+    }
+  }
+
+  async createMany({ cities }) {
+    try {
+      const allCities = await this.cityRepository.createMany(cities);
+      return allCities;
     } catch (error) {
       console.log("Something went wrong in service layer");
       throw { error };
@@ -51,6 +62,17 @@ class CityService {
         name: filter.name,
       });
       return cities;
+    } catch (error) {
+      console.log("Something went wrong in service layer");
+      throw { error };
+    }
+  }
+
+  async getAirports({ city: filter }) {
+    // alias city->filter
+    try {
+      const airports = await this.cityRepository.getAirports(filter);
+      return airports;
     } catch (error) {
       console.log("Something went wrong in service layer");
       throw { error };

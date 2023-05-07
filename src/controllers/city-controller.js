@@ -22,6 +22,26 @@ const create = async (req, res) => {
   }
 };
 
+const createMany = async (req, res) => {
+  try {
+    const allCities = await cityService.createMany(req.body);
+    return res.status(201).json({
+      data: allCities,
+      success: true,
+      message: "Successfully created multiple cities",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Not able to create object",
+      err: error,
+    });
+  }
+};
+
 const destroy = async (req, res) => {
   try {
     const response = await cityService.deleteCity(req.params.id);
@@ -101,10 +121,33 @@ const getAll = async (req, res) => {
     });
   }
 };
+
+const getAirports = async (req, res) => {
+  try {
+    const airports = await cityService.getAirports(req.query);
+    res.status(200).json({
+      data: airports,
+      success: true,
+      message: "Successfully accessed all the airports",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Not able to fetch airports",
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   create,
+  createMany,
   destroy,
   update,
   get,
   getAll,
+  getAirports,
 };
