@@ -42,6 +42,7 @@ module.exports = {
       ],
       {}
     );
+    //To seed data(i.e execute up function) use "npx sequelize db:seed --seed <file name>"
   },
 
   async down(queryInterface, Sequelize) {
@@ -51,5 +52,10 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+    await queryInterface.bulkDelete("Airports", {
+      createdAt: "2023-05-07 06:37:39",
+    });
+    //To execute down function use "npx sequelize db:seed:undo --seed <file name>"
   },
 };
