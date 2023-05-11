@@ -1,19 +1,11 @@
-const { CityController } = require("../controllers");
+const CrudService = require("./crud-service"); //Importing CrudService from ./index will generate error
 const { CityRepository } = require("../repository/index");
 
-class CityService {
+class CityService extends CrudService {
   constructor() {
-    this.cityRepository = new CityRepository();
-  }
-
-  async createCity({ name }) {
-    try {
-      const city = await this.cityRepository.createCity(name);
-      return city;
-    } catch (error) {
-      console.log("Something went wrong in service layer");
-      throw { error };
-    }
+    const cityRepository = new CityRepository();
+    super(cityRepository);
+    this.cityRepository = cityRepository;
   }
 
   async createMany({ cities }) {
@@ -26,41 +18,9 @@ class CityService {
     }
   }
 
-  async deleteCity(cityId) {
+  async getAll(filter) {
     try {
-      const response = await this.cityRepository.deleteCity(cityId);
-      return response;
-    } catch (error) {
-      console.log("Something went wrong in service layer");
-      throw { error };
-    }
-  }
-
-  async updateCity(cityId, data) {
-    try {
-      const city = await this.cityRepository.updateCity(cityId, data);
-      return city;
-    } catch (error) {
-      console.log("Something went wrong in service layer");
-      throw { error };
-    }
-  }
-
-  async getCity(cityId) {
-    try {
-      const city = await this.cityRepository.getCity(cityId);
-      return city;
-    } catch (error) {
-      console.log("Something went wrong in service layer");
-      throw { error };
-    }
-  }
-
-  async getAllCities(filter) {
-    try {
-      const cities = await this.cityRepository.getAllCities({
-        name: filter.name,
-      });
+      const cities = await this.cityRepository.getAll(filter);
       return cities;
     } catch (error) {
       console.log("Something went wrong in service layer");

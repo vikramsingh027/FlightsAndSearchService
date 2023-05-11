@@ -3,9 +3,9 @@ const { Op } = require("sequelize");
 const { Airport } = require("../models/index");
 
 class AirportRepository {
-  static async createAirport({ name, address, cityId }) {
+  static async createAirport(data) {
     try {
-      const airport = await Airport.create({ name, address, cityId });
+      const airport = await Airport.create(data);
       return airport;
     } catch (error) {
       console.log("Something went wrong in airport repository layer");
@@ -51,7 +51,7 @@ class AirportRepository {
     }
   }
 
-  static async getAllAirports(page, airport) {
+  static async getAllAirports(page = 1, airport) {
     const limit = 5;
     const offset = (page - 1) * limit;
     try {

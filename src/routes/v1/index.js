@@ -5,15 +5,16 @@ const {
   CityController,
   AirportController,
   FlightController,
+  AirplaneController,
 } = require("../../controllers/index");
 
 router.post("/city", CityController.create);
-router.post("/cities", CityController.createMany);
-router.delete("/city/:id", CityController.destroy);
-router.get("/city/airport", CityController.getAirports);
-router.get("/city/:id", CityController.get);
-router.get("/city", CityController.getAll);
-router.patch("/city/:id", CityController.update);
+router.post("/cities", CityController.createMany); //For creating multiple resources in header create query as "Content-Type: application/json"
+router.delete("/cities/:id", CityController.destroy);
+router.get("/cities/airports", CityController.getAirports);
+router.get("/cities/:id", CityController.get);
+router.get("/cities", CityController.getAll);
+router.patch("/cities/:id", CityController.update);
 
 router.post("/airports", AirportController.create);
 router.delete("/airports/:id", AirportController.destroy);
@@ -24,4 +25,10 @@ router.patch("/airports/:id", AirportController.update);
 router.post("/flights", FlightController.create);
 router.get("/flights/:id", FlightController.get);
 router.get("/flights", FlightController.getAll);
+
+router.post("/airplanes", AirplaneController.create);
+router.delete("/airplanes/:id", AirplaneController.destroy);
+router.get("/airplanes/:id", AirplaneController.get);
+router.get("/airplanes", AirplaneController.getAll);
+router.patch("/airplanes/:id", AirplaneController.update);
 module.exports = router;
