@@ -17,7 +17,7 @@ class CityRepository extends CrudRepository {
       throw { error };
     }
   }
-  //method-overloading
+  //method-overriding
   async getAll(filter) {
     //filter can be empty also
     try {
