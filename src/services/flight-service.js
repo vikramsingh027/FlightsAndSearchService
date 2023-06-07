@@ -92,6 +92,16 @@ class FlightService {
       throw { error };
     }
   }
+
+  async destroy(flightId) {
+    try {
+      const flight = await this.flightRepository.destroy(flightId);
+      return flight;
+    } catch (error) {
+      console.log("Something went wrong in service layer");
+      throw { error };
+    }
+  }
 }
 
 module.exports = FlightService;

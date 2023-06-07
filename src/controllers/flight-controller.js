@@ -91,9 +91,30 @@ const update = async (req, res) => {
   }
 };
 
+const destroy = async (req, res) => {
+  try {
+    const flight = await flightService.destroy(req.params.id);
+    return res.status(SuccessCodes.OK).json({
+      data: flight,
+      success: true,
+      message: "Successfully deleted the flight",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(serverErrorCodes.INTERNAL_SERVER_ERROR).json({
+      data: {},
+      success: false,
+      message: "Not able to delete the flight",
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   create,
   get,
   getAll,
   update,
+  destroy,
 };

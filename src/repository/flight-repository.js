@@ -46,6 +46,21 @@ class FlightRepository {
       throw { error };
     }
   }
+
+  async destroy(flightId) {
+    try {
+      const flight = await Flight.findByPk(flightId);
+      await Flight.destroy({
+        where: {
+          id: flightId,
+        },
+      });
+      return flight;
+    } catch (error) {
+      console.log("something went wrong in repository layer");
+      throw { error };
+    }
+  }
 }
 
 module.exports = FlightRepository;
